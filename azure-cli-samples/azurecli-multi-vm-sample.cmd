@@ -10,7 +10,7 @@ IF "%~1"=="" (
 :: the cluster
 
 SET LOCATION=eastus2
-SET APP_NAME=mikewapp
+SET APP_NAME=app1
 SET ENVIRONMENT=dev
 SET USERNAME=testuser
 SET PASSWORD=AweS0me@PW
@@ -30,7 +30,6 @@ SET IP_NAME=%APP_NAME%-pip
 SET NSG_NAME=%APP_NAME%-nsg
 SET SUBNET_NAME=%APP_NAME%-subnet
 SET VNET_NAME=%APP_NAME%-vnet
-
 
 :: For Windows, use the following command to get the list of URNs:
 :: azure vm image list %LOCATION% MicrosoftWindowsServer WindowsServer 2012-R2-Datacenter
@@ -88,7 +87,7 @@ CALL azure network nsg rule create -g %RESOURCE_GROUP% --nsg-name %NSG_NAME% ^
 
 :: Create VMs and per-VM resources
 
-FOR %%I IN (0,1,1) DO CALL :CreateVM %%I
+FOR /L %%I IN (0,1,1) DO CALL :CreateVM %%I
 
 GOTO :eof
 
